@@ -3,8 +3,8 @@
  * @copyright: DotKernel
  * @library: dotkernel/dot-authentication
  * @author: n3vrax
- * Date: 4/14/2016
- * Time: 11:19 PM
+ * Date: 9/6/2016
+ * Time: 7:49 PM
  */
 
 namespace DotKernelTest\DotAuthentication;
