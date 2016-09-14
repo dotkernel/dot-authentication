@@ -7,7 +7,7 @@
  * Time: 7:49 PM
  */
 
-namespace DotKernel\DotAuthentication\Identity;
+namespace Dot\Authentication\Identity;
 
 interface IdentityInterface
 {

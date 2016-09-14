@@ -7,16 +7,16 @@
  * Time: 7:49 PM
  */
 
-namespace DotKernel\DotAuthentication;
+namespace Dot\Authentication;
 
 
-use DotKernel\DotAuthentication\Identity\IdentityInterface;
+use Dot\Authentication\Identity\IdentityInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Interface AuthenticationInterface
- * @package DotKernel\DotAuthentication
+ * @package Dot\Authentication
  */
 interface AuthenticationInterface
 {

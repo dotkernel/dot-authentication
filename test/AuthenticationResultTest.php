@@ -7,16 +7,16 @@
  * Time: 7:49 PM
  */
 
-namespace DotKernelTest\DotAuthentication;
+namespace DotTest\Authentication;
 
-use DotKernel\DotAuthentication\AuthenticationResult;
-use DotKernel\DotAuthentication\Identity\IdentityInterface;
+use Dot\Authentication\AuthenticationResult;
+use Dot\Authentication\Identity\IdentityInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Class AuthenticationResultTest
- * @package DotKernelTest\DotAuthentication
+ * @package DotTest\Authentication
  */
 class AuthenticationResultTest extends \PHPUnit_Framework_TestCase
 {

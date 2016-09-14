@@ -7,11 +7,11 @@
  * Time: 7:49 PM
  */
 
-namespace DotKernel\DotAuthentication\Exception;
+namespace Dot\Authentication\Exception;
 
 /**
  * Class UnauthorizedException
- * @package DotKernel\DotAuthentication\Exception
+ * @package Dot\Authentication\Exception
  */
 class UnauthorizedException extends \Exception implements ExceptionInterface
 {
