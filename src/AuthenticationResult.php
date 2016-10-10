@@ -77,9 +77,9 @@ class AuthenticationResult
         ServerRequestInterface $request,
         ResponseInterface $response,
         IdentityInterface $identity = null,
-        $message = null)
-    {
-        $this->code = (int) $code;
+        $message = null
+    ) {
+        $this->code = (int)$code;
         $this->identity = $identity;
         $this->message = $message;
         $this->request = $request;

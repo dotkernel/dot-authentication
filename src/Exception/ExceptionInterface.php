@@ -15,5 +15,5 @@ namespace Dot\Authentication\Exception;
  */
 interface ExceptionInterface
 {
-    
+
 }
