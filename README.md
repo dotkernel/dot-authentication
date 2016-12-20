@@ -1,60 +1,93 @@
 # dot-authentication
 
-This is a core package for dk apps built on top of zend-expressive. Following the way zend-expressive provides abstractions for its router, template etc., this package provides abstraction for an authentication service. 
+Package defining authentication abstractions for authentication services.
+This package is common between several other dotkernel packages which work with authentication.
 
-### Instalation
+## Installation
 
-Usually this package will be installed with a concrete implementation of the authentication interface so you dont have to add it directly to a project. We provide [dk-zend-auhentication](http://github.com/n3vrax/dk-zend-authentication) as a bridge with zend-authentication. If you want to write your own implementation, this is how you install it:
+Usually this package will be installed with a concrete implementation of the authentication interface so you don't have to add it directly to a project.
+We provide a concrete implementation built around [zend-authentication](https://github.com/zendframework/zend-authentication) which you can find at [dot-authentication-service](https://github.com/dotkernel/dot-authentication-service)
 
-Add the package manually to your `composer.json` or run the following command from the project's root directory
+You can also implement your own authentication service by implementing the `AuthenticationInterface` in which case you'll need to add this package as dependency in your composer.json file by running the following command
 ```bash
 $ composer require dotkernel/dot-authentication
 ```
 
-Also make sure that your composer has the minimum stability set to dev for now.
-```
-"minimum-stability": "dev",
-```
+## AuthenticationInterface
 
-### AuthenticationInterface
+Interface that need to be implemented for an authentication service. 
+It is psr7 oriented, so parameters to authentication services are just valid psr7 requests and responses. 
+The actual authentication implementation must be able to extract credentials from the request(headers, attributes etc.) . 
+This is left to the choice of the implementor.
 
-Interface that need to be implemented for an authentication service. It is psr7 oriented, so parameters to authentication services are just valid psr7 requests and responses. The actual authentication implementation must be able to extract credentials from the request(headers, attributes etc.) . This is left to the choice of the implementor.
+### Methods
 
-#### challenge
+##### challenge
+
 ```php
 public function challenge(ServerRequestInterface $request, ResponseInterface $response);
 ```
-You must implement this method, and return a valid response specific to the authentication adapters that should be sent to clients in order to tell them they need to authenticate and how. Its purpose is to make possible to return an authentication adapter specific response(some require certain headers) but still keep the module decoupled from implementation details.
+
+You must implement this method, and return a valid response specific to the authentication adapters that should be sent to clients in order to tell them they need to authenticate and how. 
+Its purpose is to make possible to return an authentication adapter specific response(some require certain headers) but still keep the module decoupled from implementation details. 
 It receives the psr7 request and response. It is recommended to return a modified version of the passed response.
 
-Example: for HTTP authentications, should be a `401` response with a `WWW-Authenticate` header
-You could also return a falsy result in case adapter is not able to create a response, or it does not needs. This case must be caught in the projects that use the authentication interface and managed based on the project needs.
+Example: for HTTP authentications, should be a 401 response with a WWW-Authenticate header You could also return a falsy result in case adapter is not able to create a response, or it does not needs. 
+This case must be caught in the projects that use the authentication interface and managed based on the project needs.
 
-#### authenticate
+##### authenticate
+
 ```php
 public function authenticate(ServerRequestInterface $request, ResponseInterface $response);
 ```
 
-Given the request and response, should extract authentication credentials from the request, check if the provided credentials are valid and return a `AuthenticationResult`. Any modifications made to the request/response objects passed in should be provided to the AuthenticationResult along with the identity if authentication was successful. It can also return a falsy response, in case client cannot be authenticated and application accepts guest identity. For example, if Authorization header is not present, we should skip authentication and consider the missing identity as guest. By using this, we can create authentication logic that will work both for APIs and custom web form authentication.
+Authenticate the request, by extracting credentials from it, if present, and return an `AuthenticationResult` object.
+An `AuthenticationResult` object compose an identity object(if authentication succeeded), a flag indicating the authentication validity and also the original or modified request and response object, depending on the authentication needs.
+This method could also return a boolean false value, indicating the request cannot be authenticated usually because credentials are missing completely from the request, so that the authentication is skipped. This works well when there is an authentication middleware with high priority that checks request, but can also skip authentication in case the application accepts guests.
 
-#### Identity related methods
+##### hasIdentity
+```php
+public function hasIdentity();
+```
+Checks if someone is currently authenticated, returning a boolean value
+
+##### getIdentity
+```php
+public function getIdentity();
+```
+Gets the currently authenticated identity object. You should call `hasIdentity` before calling this method.
+
+##### clearIdentity
+```php
+public function clearIdentity();
+```
+Clears the current identity from where it is stored, basically logging out the user
+
+##### setIdentity
+```php
+public function setIdentity(IdentityInterface $identity);
+```
+Forcefully set an identity, useful for auto-logins.
+
+## IdentityInterface
+
+Defines the interface that must be implemented by objects defining authenticated entities. Only 2 methods are required by this interface:
 
 ```php
-    //check if we have an identity
-    public function hasIdentity();
-    //get the stored identity - recommended an IdentityInterface
-    public function getIdentity();
-    //clear identity - actually performing a logout
-    public function clearIdentity();
-    //forcefully sets the identity - useful for auto-login maybe
-    public function setIdentity(IdentityInterface $identity);
+public function getId();
 ```
+Gets the authenticated identity identifier(ID) value
 
-As you can see, another functionality that the authentication service must provide, is storing the authenticated identity(non-persistent, session, db etc.) and be able to retreive it.
+```php
+public function getName();
+```
+Gets the name(usually uniquely) describing the authenticated identity.
 
-### AuthenticationResult
+## AuthenticationResult
 
-Initializing an authentication result through the constructor, which is pretty self-explanatory
+Object that needs to be returned by the `authenticate` method which describes the authentication operation result.
+Initializing an authentication result is made through its constructor, which has the following signature.
+
 ```php
 public function __construct(
         $code,
@@ -64,11 +97,18 @@ public function __construct(
         $message = null)
 ```
 
-`code` should be one of the predefined constants in the class. 
+`$code` should be one of the predefined constants
 
-The request/response object are also passed in, and should come from the authentication service, modified or not. Project using concrete implementations should consider this request/response object as the one that needs to be passed further down the pipeline.
+```php
+AuthenticationResult::FAILURE
+AuthenticationResult::SUCCESS
+AuthenticationResult::FAILURE_INVALID_CREDENTIALS
+AuthenticationResult::FAILURE_IDENTITY_AMBIGUOUS
+AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND
+AuthenticationResult::FAILURE_UNCATEGORIZED
+```
 
-### Unauthorized errors
+## Unauthorized errors
 
-Can be triggered from a middleware by throwing an UnauthorizedException object. Error handling middleware should be provided by other packages to handle this kind of error in a specific manner.
-
+Can be triggered from a middleware by throwing an `UnauthorizedException` object. 
+Error handling middleware should be provided by other packages to handle this kind of error in a specific manner.
