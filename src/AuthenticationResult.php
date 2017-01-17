@@ -111,7 +111,7 @@ class AuthenticationResult
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function getMessage()
     {
@@ -133,5 +133,4 @@ class AuthenticationResult
     {
         return $this->request;
     }
-
 }
