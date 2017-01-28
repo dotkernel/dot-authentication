@@ -77,26 +77,58 @@ class AuthenticationResult
     }
 
     /**
+     * @return bool
+     */
+    public function hasIdentity() : bool
+    {
+        return $this->identity instanceof IdentityInterface;
+    }
+
+    /**
      * @return int
      */
-    public function getCode() : int
+    public function getCode(): int
     {
         return $this->code;
     }
 
     /**
+     * @param int $code
+     */
+    public function setCode(int $code)
+    {
+        $this->code = $code;
+    }
+
+    /**
      * @return IdentityInterface
      */
-    public function getIdentity() : ?IdentityInterface
+    public function getIdentity(): IdentityInterface
     {
         return $this->identity;
     }
 
     /**
+     * @param IdentityInterface $identity
+     */
+    public function setIdentity(IdentityInterface $identity)
+    {
+        $this->identity = $identity;
+    }
+
+    /**
      * @return string
      */
-    public function getMessage() : string
+    public function getMessage(): string
     {
         return $this->message;
+    }
+
+    /**
+     * @param string $message
+     */
+    public function setMessage(string $message)
+    {
+        $this->message = $message;
     }
 }

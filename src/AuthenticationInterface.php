@@ -46,22 +46,22 @@ interface AuthenticationInterface
     /**
      * Gets the underlying stored identity object
      *
-     * @return IdentityInterface|null
+     * @return IdentityInterface
      */
-    public function getIdentity() : ?IdentityInterface;
+    public function getIdentity() : IdentityInterface;
 
     /**
      * Sets the identity directly, useful for auto-login
      *
      * @param IdentityInterface $identity
-     * @return void
+     * @return mixed
      */
-    public function setIdentity(IdentityInterface $identity) : void;
+    public function setIdentity(IdentityInterface $identity);
 
     /**
      * Clears the stored identity
      *
-     * @return void
+     * @return mixed
      */
-    public function clearIdentity() : void;
+    public function clearIdentity();
 }
