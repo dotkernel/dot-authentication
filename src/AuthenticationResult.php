@@ -60,8 +60,8 @@ class AuthenticationResult
      */
     public function __construct(
         int $code,
-        IdentityInterface $identity = null,
-        $message = ''
+        string $message = '',
+        IdentityInterface $identity = null
     ) {
         $this->code = (int)$code;
         $this->identity = $identity;
