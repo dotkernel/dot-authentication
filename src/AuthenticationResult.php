@@ -31,6 +31,8 @@ class AuthenticationResult
 
     const FAILURE_UNCATEGORIZED = -4;
 
+    const FAILURE_MISSING_CREDENTIALS = -5;
+
     /**
      * Authentication result code
      *
@@ -46,9 +48,9 @@ class AuthenticationResult
     /**
      * string messages describing the auth failure
      *
-     * @var string|null
+     * @var string
      */
-    protected $message;
+    protected $message = '';
 
     /**
      * The modified response that should be returned to user
@@ -73,7 +75,7 @@ class AuthenticationResult
      * @param string $message
      */
     public function __construct(
-        $code,
+        int $code,
         ServerRequestInterface $request,
         ResponseInterface $response,
         IdentityInterface $identity = null,
@@ -89,7 +91,7 @@ class AuthenticationResult
     /**
      * @return bool
      */
-    public function isValid()
+    public function isValid() : bool
     {
         return ($this->code > 0);
     }
@@ -97,7 +99,7 @@ class AuthenticationResult
     /**
      * @return int
      */
-    public function getCode()
+    public function getCode() : int
     {
         return $this->code;
     }
@@ -105,7 +107,7 @@ class AuthenticationResult
     /**
      * @return IdentityInterface
      */
-    public function getIdentity()
+    public function getIdentity() : IdentityInterface
     {
         return $this->identity;
     }
@@ -113,7 +115,7 @@ class AuthenticationResult
     /**
      * @return string
      */
-    public function getMessage()
+    public function getMessage() : string
     {
         return $this->message;
     }
@@ -121,7 +123,7 @@ class AuthenticationResult
     /**
      * @return ResponseInterface
      */
-    public function getResponse()
+    public function getResponse() : ResponseInterface
     {
         return $this->response;
     }
@@ -129,7 +131,7 @@ class AuthenticationResult
     /**
      * @return ServerRequestInterface
      */
-    public function getRequest()
+    public function getRequest() : ServerRequestInterface
     {
         return $this->request;
     }
