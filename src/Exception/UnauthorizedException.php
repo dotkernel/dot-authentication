@@ -11,11 +11,16 @@ declare(strict_types=1);
 
 namespace Dot\Authentication\Exception;
 
+use Exception;
+
 /**
  * Class UnauthorizedException
  * @package Dot\Authentication\Exception
  */
 class UnauthorizedException extends \Exception implements ExceptionInterface
 {
-
+    public function __construct($message = "", $code = 401, Exception $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
 }
