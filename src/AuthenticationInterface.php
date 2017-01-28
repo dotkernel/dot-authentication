@@ -54,14 +54,11 @@ interface AuthenticationInterface
      * Sets the identity directly, useful for auto-login
      *
      * @param IdentityInterface $identity
-     * @return mixed
      */
     public function setIdentity(IdentityInterface $identity);
 
     /**
      * Clears the stored identity
-     *
-     * @return mixed
      */
     public function clearIdentity();
 }
