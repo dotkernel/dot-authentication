@@ -35,8 +35,6 @@ class AuthenticationResultTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(AuthenticationResult::SUCCESS, $result->getCode());
-        $this->assertEquals($request, $result->getRequest());
-        $this->assertEquals($response, $result->getResponse());
         $this->assertEquals($identity, $result->getIdentity());
         $this->assertTrue($result->isValid());
 

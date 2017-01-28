@@ -7,11 +7,11 @@
  * Time: 7:49 PM
  */
 
+declare(strict_types=1);
+
 namespace Dot\Authentication;
 
 use Dot\Authentication\Identity\IdentityInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Class AuthenticationResult
@@ -53,39 +53,19 @@ class AuthenticationResult
     protected $message = '';
 
     /**
-     * The modified response that should be returned to user
-     *
-     * @var ResponseInterface
-     */
-    protected $response;
-
-    /**
-     * The request object as received or with possible modifications
-     *
-     * @var ServerRequestInterface
-     */
-    protected $request;
-
-    /**
      * AuthenticationResult constructor.
      * @param $code
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
      * @param IdentityInterface|null $identity
      * @param string $message
      */
     public function __construct(
         int $code,
-        ServerRequestInterface $request,
-        ResponseInterface $response,
         IdentityInterface $identity = null,
-        $message = null
+        $message = ''
     ) {
         $this->code = (int)$code;
         $this->identity = $identity;
         $this->message = $message;
-        $this->request = $request;
-        $this->response = $response;
     }
 
     /**
@@ -107,7 +87,7 @@ class AuthenticationResult
     /**
      * @return IdentityInterface
      */
-    public function getIdentity() : IdentityInterface
+    public function getIdentity() : ?IdentityInterface
     {
         return $this->identity;
     }
@@ -118,21 +98,5 @@ class AuthenticationResult
     public function getMessage() : string
     {
         return $this->message;
-    }
-
-    /**
-     * @return ResponseInterface
-     */
-    public function getResponse() : ResponseInterface
-    {
-        return $this->response;
-    }
-
-    /**
-     * @return ServerRequestInterface
-     */
-    public function getRequest() : ServerRequestInterface
-    {
-        return $this->request;
     }
 }

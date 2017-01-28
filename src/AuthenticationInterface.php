@@ -7,6 +7,8 @@
  * Time: 7:49 PM
  */
 
+declare(strict_types=1);
+
 namespace Dot\Authentication;
 
 use Dot\Authentication\Identity\IdentityInterface;
@@ -24,17 +26,15 @@ interface AuthenticationInterface
      * This usually means a 401 response with a www-authenticate header
      *
      * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
      * @return ResponseInterface
      */
-    public function challenge(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface;
+    public function challenge(ServerRequestInterface $request) : ResponseInterface;
 
     /**
      * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
      * @return AuthenticationResult
      */
-    public function authenticate(ServerRequestInterface $request, ResponseInterface $response) : AuthenticationResult;
+    public function authenticate(ServerRequestInterface $request) : AuthenticationResult;
 
     /**
      * Check is there's an identity set
@@ -46,22 +46,22 @@ interface AuthenticationInterface
     /**
      * Gets the underlying stored identity object
      *
-     * @return IdentityInterface
+     * @return IdentityInterface|null
      */
-    public function getIdentity() : IdentityInterface;
+    public function getIdentity() : ?IdentityInterface;
 
     /**
      * Sets the identity directly, useful for auto-login
      *
      * @param IdentityInterface $identity
-     * @return mixed
+     * @return void
      */
-    public function setIdentity(IdentityInterface $identity);
+    public function setIdentity(IdentityInterface $identity) : void;
 
     /**
      * Clears the stored identity
      *
      * @return void
      */
-    public function clearIdentity();
+    public function clearIdentity() : void;
 }
