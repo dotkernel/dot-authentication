@@ -7,7 +7,7 @@
  * Time: 7:49 PM
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Dot\Authentication\Identity;
 
@@ -20,10 +20,10 @@ interface IdentityInterface
     /**
      * @return string
      */
-    public function getId() : string;
+    public function getId(): string;
 
     /**
      * @return string
      */
-    public function getName() : string;
+    public function getName(): string;
 }

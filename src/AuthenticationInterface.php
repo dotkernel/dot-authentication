@@ -7,7 +7,7 @@
  * Time: 7:49 PM
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Dot\Authentication;
 
@@ -28,27 +28,27 @@ interface AuthenticationInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function challenge(ServerRequestInterface $request) : ResponseInterface;
+    public function challenge(ServerRequestInterface $request): ResponseInterface;
 
     /**
      * @param ServerRequestInterface $request
      * @return AuthenticationResult
      */
-    public function authenticate(ServerRequestInterface $request) : AuthenticationResult;
+    public function authenticate(ServerRequestInterface $request): AuthenticationResult;
 
     /**
      * Check is there's an identity set
      *
      * @return bool
      */
-    public function hasIdentity() : bool;
+    public function hasIdentity(): bool;
 
     /**
      * Gets the underlying stored identity object
      *
      * @return IdentityInterface
      */
-    public function getIdentity() : IdentityInterface;
+    public function getIdentity(): IdentityInterface;
 
     /**
      * Sets the identity directly, useful for auto-login

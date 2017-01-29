@@ -7,7 +7,7 @@
  * Time: 7:49 PM
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Dot\Authentication;
 
@@ -71,7 +71,7 @@ class AuthenticationResult
     /**
      * @return bool
      */
-    public function isValid() : bool
+    public function isValid(): bool
     {
         return ($this->code > 0);
     }
@@ -79,7 +79,7 @@ class AuthenticationResult
     /**
      * @return bool
      */
-    public function hasIdentity() : bool
+    public function hasIdentity(): bool
     {
         return $this->identity instanceof IdentityInterface;
     }
