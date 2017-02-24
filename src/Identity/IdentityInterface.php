@@ -25,5 +25,5 @@ interface IdentityInterface
     /**
      * @return string
      */
-    public function getName(): string;
+    public function getName();
 }
