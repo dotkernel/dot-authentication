@@ -103,7 +103,7 @@ class AuthenticationResult
     /**
      * @return IdentityInterface
      */
-    public function getIdentity(): IdentityInterface
+    public function getIdentity(): ?IdentityInterface
     {
         return $this->identity;
     }
@@ -121,7 +121,7 @@ class AuthenticationResult
      */
     public function getMessage(): string
     {
-        return $this->message;
+        return $this->message ?? '';
     }
 
     /**

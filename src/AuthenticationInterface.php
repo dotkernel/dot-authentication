@@ -48,7 +48,7 @@ interface AuthenticationInterface
      *
      * @return IdentityInterface
      */
-    public function getIdentity(): IdentityInterface;
+    public function getIdentity(): ?IdentityInterface;
 
     /**
      * Sets the identity directly, useful for auto-login
