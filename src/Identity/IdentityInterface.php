@@ -7,8 +7,14 @@
  * Time: 7:49 PM
  */
 
+declare(strict_types = 1);
+
 namespace Dot\Authentication\Identity;
 
+/**
+ * Interface IdentityInterface
+ * @package Dot\Authentication\Identity
+ */
 interface IdentityInterface
 {
     /**
@@ -19,5 +25,5 @@ interface IdentityInterface
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 }

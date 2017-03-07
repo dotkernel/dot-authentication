@@ -7,11 +7,11 @@
  * Time: 7:49 PM
  */
 
+declare(strict_types = 1);
+
 namespace Dot\Authentication;
 
 use Dot\Authentication\Identity\IdentityInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Class AuthenticationResult
@@ -31,6 +31,8 @@ class AuthenticationResult
 
     const FAILURE_UNCATEGORIZED = -4;
 
+    const FAILURE_MISSING_CREDENTIALS = -5;
+
     /**
      * Authentication result code
      *
@@ -46,91 +48,87 @@ class AuthenticationResult
     /**
      * string messages describing the auth failure
      *
-     * @var string|null
+     * @var string
      */
-    protected $message;
-
-    /**
-     * The modified response that should be returned to user
-     *
-     * @var ResponseInterface
-     */
-    protected $response;
-
-    /**
-     * The request object as received or with possible modifications
-     *
-     * @var ServerRequestInterface
-     */
-    protected $request;
+    protected $message = '';
 
     /**
      * AuthenticationResult constructor.
      * @param $code
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
      * @param IdentityInterface|null $identity
      * @param string $message
      */
     public function __construct(
-        $code,
-        ServerRequestInterface $request,
-        ResponseInterface $response,
-        IdentityInterface $identity = null,
-        $message = null
+        int $code,
+        string $message = '',
+        IdentityInterface $identity = null
     ) {
         $this->code = (int)$code;
         $this->identity = $identity;
         $this->message = $message;
-        $this->request = $request;
-        $this->response = $response;
     }
 
     /**
      * @return bool
      */
-    public function isValid()
+    public function isValid(): bool
     {
         return ($this->code > 0);
     }
 
     /**
+     * @return bool
+     */
+    public function hasIdentity(): bool
+    {
+        return $this->identity instanceof IdentityInterface;
+    }
+
+    /**
      * @return int
      */
-    public function getCode()
+    public function getCode(): int
     {
         return $this->code;
     }
 
     /**
+     * @param int $code
+     */
+    public function setCode(int $code)
+    {
+        $this->code = $code;
+    }
+
+    /**
      * @return IdentityInterface
      */
-    public function getIdentity()
+    public function getIdentity(): ?IdentityInterface
     {
         return $this->identity;
     }
 
     /**
+     * @param IdentityInterface $identity
+     */
+    public function setIdentity(IdentityInterface $identity)
+    {
+        $this->identity = $identity;
+    }
+
+    /**
      * @return string
      */
-    public function getMessage()
+    public function getMessage(): string
     {
-        return $this->message;
+        return $this->message ?? '';
     }
 
     /**
-     * @return ResponseInterface
+     * @param string $message
      */
-    public function getResponse()
+    public function setMessage(string $message)
     {
-        return $this->response;
-    }
-
-    /**
-     * @return ServerRequestInterface
-     */
-    public function getRequest()
-    {
-        return $this->request;
+        $this->message = $message;
     }
 }
