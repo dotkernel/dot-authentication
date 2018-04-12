@@ -1,3 +1,20 @@
+## 1.0.0 - 2018-04-12
+
+Version bump
+
+### Added
+* Update composer.json file
+
+### Deprecated
+* Nothing
+
+### Removed
+* Nothing
+
+### Fixed
+* Nothing
+
+
 ## 0.1.1 - 2017-03-10
 
 ### Added
