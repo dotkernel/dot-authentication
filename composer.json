@@ -5,8 +5,8 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "n3vrax",
-      "email": "tibi@apidemia.com"
+      "name": "DotKernel Team",
+      "email": "team@dotkernel.com"
     }
   ],
   "require": {
@@ -29,8 +29,8 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "0.1-dev",
-      "dev-develop": "0.2-dev"
+      "dev-master": "1.0-dev",
+      "dev-develop": "1.1-dev"
     }
   }
 }
