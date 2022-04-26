@@ -2,7 +2,14 @@
 
 Authentication base package defining interfaces for authentication services to be used with DotKernel applications.
 
-**Requires PHP version >= 7.1**
+![OSS Lifecycle](https://img.shields.io/osslifecycle/dotkernel/dot-authentication)
+![PHP from Packagist (specify version)](https://img.shields.io/packagist/php-v/dotkernel/dot-authentication/v2.0.0)
+
+[![GitHub issues](https://img.shields.io/github/issues/dotkernel/dot-authentication)](https://github.com/dotkernel/dot-authentication/issues)
+[![GitHub forks](https://img.shields.io/github/forks/dotkernel/dot-authentication)](https://github.com/dotkernel/dot-authentication/network)
+[![GitHub stars](https://img.shields.io/github/stars/dotkernel/dot-authentication)](https://github.com/dotkernel/dot-authentication/stargazers)
+[![GitHub license](https://img.shields.io/github/license/dotkernel/dot-authentication)](https://github.com/dotkernel/dot-authentication/blob/3.0/LICENSE.md)
+
 
 ## Installation
 
