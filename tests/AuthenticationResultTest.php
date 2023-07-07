@@ -19,7 +19,7 @@ class AuthenticationResultTest extends TestCase
         $this->indentyInterfaceMock = $this->createMock(IdentityInterface::class);
         $this->indentyInterfaceMock->method('getId')->will($this->returnValue(10));
         $this->indentyInterfaceMock->method('getName')->willReturn('username');
-        $this->subject = new AuthenticationResult(1, 'valid', $this->indentyInterfaceMock);
+        $this->subject = new AuthenticationResult(2, 'valid', $this->indentyInterfaceMock);
 
         parent::setUp();
     }
@@ -32,7 +32,7 @@ class AuthenticationResultTest extends TestCase
         $interface = $this->subject->hasIdentity();
         $isValid   = $this->subject->isValid();
 
-        $this->assertSame(1, $code);
+        $this->assertSame(2, $code);
         $this->assertSame('valid', $message);
         $this->assertSame('username', $name->getName());
         $this->assertSame(10, $name->getId());
