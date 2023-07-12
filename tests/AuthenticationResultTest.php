@@ -6,22 +6,24 @@ namespace DotTest\Authentication;
 
 use Dot\Authentication\AuthenticationResult;
 use Dot\Authentication\Identity\IdentityInterface;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class AuthenticationResultTest extends TestCase
 {
     protected AuthenticationResult $subject;
-    protected MockObject|IdentityInterface $indentyInterfaceMock;
+    protected IdentityInterface|MockObject $indentyInterfaceMock;
 
+    /**
+     * @throws Exception
+     */
     protected function setUp(): void
     {
         $this->indentyInterfaceMock = $this->createMock(IdentityInterface::class);
         $this->indentyInterfaceMock->method('getId')->will($this->returnValue(10));
         $this->indentyInterfaceMock->method('getName')->willReturn('username');
         $this->subject = new AuthenticationResult(2, 'valid', $this->indentyInterfaceMock);
-
-        parent::setUp();
     }
 
     public function testAuth()

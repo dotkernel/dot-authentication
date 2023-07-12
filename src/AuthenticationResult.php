@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @see https://github.com/dotkernel/dot-authentication/ for the canonical source repository
- */
-
 declare(strict_types=1);
 
 namespace Dot\Authentication;
@@ -12,31 +8,23 @@ use Dot\Authentication\Identity\IdentityInterface;
 
 class AuthenticationResult
 {
-//    const FAILURE                     = 0;
-//    const SUCCESS                     = 1;
-//    const FAILURE_INVALID_CREDENTIALS = -1;
-//    const FAILURE_IDENTITY_AMBIGUOUS  = -2;
-//    const FAILURE_IDENTITY_NOT_FOUND  = -3;
-//    const FAILURE_UNCATEGORIZED       = -4;
-//    const FAILURE_MISSING_CREDENTIALS = -5;
-/**
- * Authentication result code
- *
- * @var int
- */
-    protected $code;
-/** @var IdentityInterface */
-    protected $identity;
-/**
- * string messages describing the auth failure
- *
- * @var string
- */
-    protected $message = '';
+    protected const FAILURE                     = 0;
+    protected const SUCCESS                     = 1;
+    protected const FAILURE_INVALID_CREDENTIALS = -1;
+    protected const FAILURE_IDENTITY_AMBIGUOUS  = -2;
+    protected const FAILURE_IDENTITY_NOT_FOUND  = -3;
+    protected const FAILURE_UNCATEGORIZED       = -4;
+    protected const FAILURE_MISSING_CREDENTIALS = -5;
+
+    protected int $code;
+
+    protected IdentityInterface $identity;
+
+    protected string $message = '';
 
     public function __construct(int $code, string $message = '', ?IdentityInterface $identity = null)
     {
-        $this->code     = (int) $code;
+        $this->code     = $code;
         $this->identity = $identity;
         $this->message  = $message;
     }
@@ -73,7 +61,7 @@ class AuthenticationResult
 
     public function getMessage(): string
     {
-        return $this->message ?? '';
+        return $this->message;
     }
 
     public function setMessage(string $message)
