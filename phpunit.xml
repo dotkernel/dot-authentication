@@ -4,7 +4,7 @@
          bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="Dot Authentication Test Suite">
-            <directory>./tests</directory>
+            <directory>./test</directory>
         </testsuite>
     </testsuites>
 </phpunit>
