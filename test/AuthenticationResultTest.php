@@ -34,6 +34,7 @@ class AuthenticationResultTest extends TestCase
         $interface = $this->subject->hasIdentity();
         $isValid   = $this->subject->isValid();
 
+        $this->assertInstanceOf(IdentityInterface::class, $name);
         $this->assertSame(2, $code);
         $this->assertSame('valid', $message);
         $this->assertSame('username', $name->getName());

@@ -44,7 +44,7 @@ class AuthenticationResult
         return $this->code;
     }
 
-    public function setCode(int $code)
+    public function setCode(int $code): void
     {
         $this->code = $code;
     }
@@ -54,7 +54,7 @@ class AuthenticationResult
         return $this->identity;
     }
 
-    public function setIdentity(IdentityInterface $identity)
+    public function setIdentity(IdentityInterface $identity): void
     {
         $this->identity = $identity;
     }
@@ -64,7 +64,7 @@ class AuthenticationResult
         return $this->message;
     }
 
-    public function setMessage(string $message)
+    public function setMessage(string $message): void
     {
         $this->message = $message;
     }

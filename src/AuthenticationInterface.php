@@ -34,10 +34,10 @@ interface AuthenticationInterface
     /**
      * Sets the identity directly, useful for auto-login
      */
-    public function setIdentity(IdentityInterface $identity);
+    public function setIdentity(IdentityInterface $identity): IdentityInterface;
 
     /**
      * Clears the stored identity
      */
-    public function clearIdentity();
+    public function clearIdentity(): IdentityInterface;
 }

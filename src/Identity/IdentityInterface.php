@@ -12,7 +12,7 @@ interface IdentityInterface
     /**
      * @return mixed
      */
-    public function getId();
+    public function getId(): int;
 
     public function getName(): string;
 }
