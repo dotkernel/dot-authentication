@@ -1,20 +1,46 @@
 <?php
-/**
- * @see https://github.com/dotkernel/dot-authentication/ for the canonical source repository
- * @copyright Copyright (c) 2017 Apidemia (https://www.apidemia.com)
- * @license https://github.com/dotkernel/dot-authentication/blob/master/LICENSE.md MIT License
- */
+
+declare(strict_types=1);
 
 namespace DotTest\Authentication;
 
-/**
- * Class AuthenticationResultTest
- * @package DotTest\Authentication
- */
-class AuthenticationResultTest extends \PHPUnit_Framework_TestCase
+use Dot\Authentication\AuthenticationResult;
+use Dot\Authentication\Identity\IdentityInterface;
+use PHPUnit\Framework\MockObject\Exception;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+
+class AuthenticationResultTest extends TestCase
 {
-    public function testGetters()
+    protected AuthenticationResult $subject;
+    protected IdentityInterface|MockObject $indentyInterfaceMock;
+
+    /**
+     * @throws Exception
+     */
+    protected function setUp(): void
     {
-        // TODO: tests
+        $this->indentyInterfaceMock = $this->createMock(IdentityInterface::class);
+        $this->indentyInterfaceMock->method('getId')->will($this->returnValue(10));
+        $this->indentyInterfaceMock->method('getName')->willReturn('username');
+        $this->subject = new AuthenticationResult(2, 'valid', $this->indentyInterfaceMock);
+    }
+
+    public function testAuth()
+    {
+        $code      = $this->subject->getCode();
+        $message   = $this->subject->getMessage();
+        $name      = $this->subject->getIdentity();
+        $interface = $this->subject->hasIdentity();
+        $isValid   = $this->subject->isValid();
+
+        $this->assertInstanceOf(IdentityInterface::class, $name);
+        $this->assertSame(2, $code);
+        $this->assertSame('valid', $message);
+        $this->assertSame('username', $name->getName());
+        $this->assertSame(10, $name->getId());
+        $this->assertTrue($interface);
+        $this->assertEquals('valid', $message);
+        $this->assertTrue($isValid);
     }
 }

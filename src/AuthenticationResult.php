@@ -1,131 +1,70 @@
 <?php
-/**
- * @see https://github.com/dotkernel/dot-authentication/ for the canonical source repository
- * @copyright Copyright (c) 2017 Apidemia (https://www.apidemia.com)
- * @license https://github.com/dotkernel/dot-authentication/blob/master/LICENSE.md MIT License
- */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Dot\Authentication;
 
 use Dot\Authentication\Identity\IdentityInterface;
 
-/**
- * Class AuthenticationResult
- * @package Dot\Authentication
- */
 class AuthenticationResult
 {
-    const FAILURE = 0;
+    protected const FAILURE                     = 0;
+    protected const SUCCESS                     = 1;
+    protected const FAILURE_INVALID_CREDENTIALS = -1;
+    protected const FAILURE_IDENTITY_AMBIGUOUS  = -2;
+    protected const FAILURE_IDENTITY_NOT_FOUND  = -3;
+    protected const FAILURE_UNCATEGORIZED       = -4;
+    protected const FAILURE_MISSING_CREDENTIALS = -5;
 
-    const SUCCESS = 1;
+    protected int $code;
 
-    const FAILURE_INVALID_CREDENTIALS = -1;
+    protected IdentityInterface $identity;
 
-    const FAILURE_IDENTITY_AMBIGUOUS = -2;
+    protected string $message = '';
 
-    const FAILURE_IDENTITY_NOT_FOUND = -3;
-
-    const FAILURE_UNCATEGORIZED = -4;
-
-    const FAILURE_MISSING_CREDENTIALS = -5;
-
-    /**
-     * Authentication result code
-     *
-     * @var int
-     */
-    protected $code;
-
-    /**
-     * @var IdentityInterface
-     */
-    protected $identity;
-
-    /**
-     * string messages describing the auth failure
-     *
-     * @var string
-     */
-    protected $message = '';
-
-    /**
-     * AuthenticationResult constructor.
-     * @param $code
-     * @param IdentityInterface|null $identity
-     * @param string $message
-     */
-    public function __construct(
-        int $code,
-        string $message = '',
-        IdentityInterface $identity = null
-    ) {
-        $this->code = (int)$code;
+    public function __construct(int $code, string $message = '', ?IdentityInterface $identity = null)
+    {
+        $this->code     = $code;
         $this->identity = $identity;
-        $this->message = $message;
+        $this->message  = $message;
     }
 
-    /**
-     * @return bool
-     */
     public function isValid(): bool
     {
-        return ($this->code > 0);
+        return $this->code > 0;
     }
 
-    /**
-     * @return bool
-     */
     public function hasIdentity(): bool
     {
         return $this->identity instanceof IdentityInterface;
     }
 
-    /**
-     * @return int
-     */
     public function getCode(): int
     {
         return $this->code;
     }
 
-    /**
-     * @param int $code
-     */
-    public function setCode(int $code)
+    public function setCode(int $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * @return IdentityInterface
-     */
     public function getIdentity(): ?IdentityInterface
     {
         return $this->identity;
     }
 
-    /**
-     * @param IdentityInterface $identity
-     */
-    public function setIdentity(IdentityInterface $identity)
+    public function setIdentity(IdentityInterface $identity): void
     {
         $this->identity = $identity;
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
-        return $this->message ?? '';
+        return $this->message;
     }
 
-    /**
-     * @param string $message
-     */
-    public function setMessage(string $message)
+    public function setMessage(string $message): void
     {
         $this->message = $message;
     }
