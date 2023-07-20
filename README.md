@@ -10,7 +10,7 @@ Authentication base package defining interfaces for authentication services to b
 [![GitHub stars](https://img.shields.io/github/stars/dotkernel/dot-authentication)](https://github.com/dotkernel/dot-authentication/stargazers)
 [![GitHub license](https://img.shields.io/github/license/dotkernel/dot-authentication)](https://github.com/dotkernel/dot-authentication/blob/2.1/LICENSE.md)
 
-[![Build Static](https://github.com/dotkernel/dot-authentication/actions/workflows/static-analysis.yml/badge.svg?branch=3.0)](https://github.com/dotkernel/dot-authentication/actions/workflows/static-analysis.yml)
+[![Build Static](https://github.com/dotkernel/dot-authentication/actions/workflows/static-analysis.yml/badge.svg?branch=2.0)](https://github.com/dotkernel/dot-authentication/actions/workflows/static-analysis.yml)
 
 [![SymfonyInsight](https://insight.symfony.com/projects/8a0dfa12-fdda-43d7-bdbe-1c6996b30c12/big.svg)](https://insight.symfony.com/projects/8a0dfa12-fdda-43d7-bdbe-1c6996b30c12)
 
