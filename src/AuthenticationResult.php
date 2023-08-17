@@ -18,7 +18,7 @@ class AuthenticationResult
 
     protected int $code;
 
-    protected ?IdentityInterface $identity;
+    protected ?IdentityInterface $identity = null;
 
     protected string $message = '';
 
