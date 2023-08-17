@@ -13,17 +13,17 @@ use PHPUnit\Framework\TestCase;
 class AuthenticationResultTest extends TestCase
 {
     protected AuthenticationResult $subject;
-    protected IdentityInterface|MockObject $indentyInterfaceMock;
+    protected IdentityInterface|MockObject $identityInterfaceMock;
 
     /**
      * @throws Exception
      */
     protected function setUp(): void
     {
-        $this->indentyInterfaceMock = $this->createMock(IdentityInterface::class);
-        $this->indentyInterfaceMock->method('getId')->will($this->returnValue(10));
-        $this->indentyInterfaceMock->method('getName')->willReturn('username');
-        $this->subject = new AuthenticationResult(2, 'valid', $this->indentyInterfaceMock);
+        $this->identityInterfaceMock = $this->createMock(IdentityInterface::class);
+        $this->identityInterfaceMock->method('getId')->will($this->returnValue(10));
+        $this->identityInterfaceMock->method('getName')->willReturn('username');
+        $this->subject = new AuthenticationResult(2, 'valid', $this->identityInterfaceMock);
     }
 
     public function testAuth()

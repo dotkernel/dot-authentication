@@ -8,17 +8,17 @@ use Dot\Authentication\Identity\IdentityInterface;
 
 class AuthenticationResult
 {
-    protected const FAILURE                     = 0;
-    protected const SUCCESS                     = 1;
-    protected const FAILURE_INVALID_CREDENTIALS = -1;
-    protected const FAILURE_IDENTITY_AMBIGUOUS  = -2;
-    protected const FAILURE_IDENTITY_NOT_FOUND  = -3;
-    protected const FAILURE_UNCATEGORIZED       = -4;
-    protected const FAILURE_MISSING_CREDENTIALS = -5;
+    public const FAILURE                     = 0;
+    public const SUCCESS                     = 1;
+    public const FAILURE_INVALID_CREDENTIALS = -1;
+    public const FAILURE_IDENTITY_AMBIGUOUS  = -2;
+    public const FAILURE_IDENTITY_NOT_FOUND  = -3;
+    public const FAILURE_UNCATEGORIZED       = -4;
+    public const FAILURE_MISSING_CREDENTIALS = -5;
 
     protected int $code;
 
-    protected IdentityInterface $identity;
+    protected ?IdentityInterface $identity = null;
 
     protected string $message = '';
 
