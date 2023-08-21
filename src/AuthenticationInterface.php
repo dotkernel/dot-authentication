@@ -39,5 +39,5 @@ interface AuthenticationInterface
     /**
      * Clears the stored identity
      */
-    public function clearIdentity(): IdentityInterface;
+    public function clearIdentity(): void;
 }
