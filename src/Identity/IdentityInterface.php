@@ -9,10 +9,7 @@ namespace Dot\Authentication\Identity;
  */
 interface IdentityInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId(): int;
+    public function getId(): mixed;
 
     public function getName(): string;
 }
