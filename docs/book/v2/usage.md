@@ -1,29 +1,4 @@
-# dot-authentication
-
-Authentication base package defining interfaces for authentication services to be used with DotKernel applications.
-
-![OSS Lifecycle](https://img.shields.io/osslifecycle/dotkernel/dot-authentication)
-![PHP from Packagist (specify version)](https://img.shields.io/packagist/php-v/dotkernel/dot-authentication/2.3.4)
-
-[![GitHub issues](https://img.shields.io/github/issues/dotkernel/dot-authentication)](https://github.com/dotkernel/dot-authentication/issues)
-[![GitHub forks](https://img.shields.io/github/forks/dotkernel/dot-authentication)](https://github.com/dotkernel/dot-authentication/network)
-[![GitHub stars](https://img.shields.io/github/stars/dotkernel/dot-authentication)](https://github.com/dotkernel/dot-authentication/stargazers)
-[![GitHub license](https://img.shields.io/github/license/dotkernel/dot-authentication)](https://github.com/dotkernel/dot-authentication/blob/2.0/LICENSE.md)
-
-[![Build Static](https://github.com/dotkernel/dot-authentication/actions/workflows/continuous-integration.yml/badge.svg?branch=2.0)](https://github.com/dotkernel/dot-authentication/actions/workflows/continuous-integration.yml)
-[![codecov](https://codecov.io/gh/dotkernel/dot-authentication/graph/badge.svg?token=ZBZDEA3LY8)](https://codecov.io/gh/dotkernel/dot-authentication)
-
-[![SymfonyInsight](https://insight.symfony.com/projects/8a0dfa12-fdda-43d7-bdbe-1c6996b30c12/big.svg)](https://insight.symfony.com/projects/8a0dfa12-fdda-43d7-bdbe-1c6996b30c12)
-
-## Installation
-
-Run the following command in you project directory
-
-```bash
-$ composer require dotkernel/dot-authentication
-```
-
-Please note that usually this package will be installed as a dependency to a concrete implementation, so usually you won't need to add this to you project manually.
+# Usage
 
 ## AuthenticationInterface
 

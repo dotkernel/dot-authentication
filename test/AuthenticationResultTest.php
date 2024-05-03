@@ -26,7 +26,12 @@ class AuthenticationResultTest extends TestCase
         $this->subject = new AuthenticationResult(2, 'valid', $this->identityInterfaceMock);
     }
 
-    public function testAuth()
+    public function testCreate(): void
+    {
+        $this->assertInstanceOf(IdentityInterface::class, $this->identityInterfaceMock);
+    }
+
+    public function testAuth(): void
     {
         $code      = $this->subject->getCode();
         $message   = $this->subject->getMessage();
@@ -34,7 +39,6 @@ class AuthenticationResultTest extends TestCase
         $interface = $this->subject->hasIdentity();
         $isValid   = $this->subject->isValid();
 
-        $this->assertInstanceOf(IdentityInterface::class, $name);
         $this->assertSame(2, $code);
         $this->assertSame('valid', $message);
         $this->assertSame('username', $name->getName());
