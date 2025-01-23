@@ -2,4 +2,6 @@
 
 Install `dot-authentication` by executing the following Composer command:
 
-    composer require dotkernel/dot-authentication
+```shell
+composer require dotkernel/dot-authentication
+```
