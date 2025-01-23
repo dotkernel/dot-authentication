@@ -5,17 +5,17 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "DotKernel Team",
+            "name": "Dotkernel Team",
             "email": "team@dotkernel.com"
         }
     ],
     "require": {
-        "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
+        "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
         "psr/http-message": "^1.0 || ^2.0"
     },
     "require-dev": {
+        "laminas/laminas-coding-standard": "^3.0",
         "phpunit/phpunit": "^10.2",
-        "laminas/laminas-coding-standard": "^2.5",
         "vimeo/psalm": "^5.13"
     },
     "autoload": {
@@ -38,7 +38,8 @@
     "scripts": {
         "check": [
             "@cs-check",
-            "@test"
+            "@test",
+            "@static-analysis"
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
