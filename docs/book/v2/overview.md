@@ -16,4 +16,4 @@ Core interfaces for authentication implementations.
 
 [![Build Static](https://github.com/dotkernel/dot-authentication/actions/workflows/continuous-integration.yml/badge.svg?branch=2.0)](https://github.com/dotkernel/dot-authentication/actions/workflows/continuous-integration.yml)
 [![codecov](https://codecov.io/gh/dotkernel/dot-authentication/graph/badge.svg?token=ZBZDEA3LY8)](https://codecov.io/gh/dotkernel/dot-authentication)
-[![PHPStan](https://github.com/dotkernel/dot-authentication/actions/workflows/static-analysis.yml/badge.svg?branch=4.0)](https://github.com/dotkernel/dot-authentication/actions/workflows/static-analysis.yml)
+[![PHPStan](https://github.com/dotkernel/dot-authentication/actions/workflows/static-analysis.yml/badge.svg?branch=2.0)](https://github.com/dotkernel/dot-authentication/actions/workflows/static-analysis.yml)
