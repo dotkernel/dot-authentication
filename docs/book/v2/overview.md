@@ -2,12 +2,12 @@
 
 Core interfaces for authentication implementations.
 
-`dot-authentication` is Dotkernel's authentication base package which define interfaces for authentication services to be used with Dotkernel applications.
+`dot-authentication` is Dotkernel's authentication base package that defines interfaces for authentication services to be used with Dotkernel applications.
 
 ## Badges
 
 ![OSS Lifecycle](https://img.shields.io/osslifecycle/dotkernel/dot-authentication)
-![PHP from Packagist (specify version)](https://img.shields.io/packagist/php-v/dotkernel/dot-authentication/2.6.0)
+![PHP from Packagist (specify version)](https://img.shields.io/packagist/php-v/dotkernel/dot-authentication/2.7.0)
 
 [![GitHub issues](https://img.shields.io/github/issues/dotkernel/dot-authentication)](https://github.com/dotkernel/dot-authentication/issues)
 [![GitHub forks](https://img.shields.io/github/forks/dotkernel/dot-authentication)](https://github.com/dotkernel/dot-authentication/network)
