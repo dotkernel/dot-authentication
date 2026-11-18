@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace DotTest\Authentication\Exception;
 
-use InvalidArgumentException;
-use PHPUnit\Framework\MockObject\MockObject;
+use Dot\Authentication\Exception\ExceptionInterface;
+use Dot\Authentication\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
-class InvalidArgumentExceptionTest extends TestCase
+final class InvalidArgumentExceptionTest extends TestCase
 {
-    protected InvalidArgumentException|MockObject $exceptionInterfaceMock;
-
-    public function setUp(): void
+    public function testCanBeCaughtAsPackageException(): void
     {
-        $this->exceptionInterfaceMock = $this->createMock(InvalidArgumentException::class);
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage('message');
+
+        throw new InvalidArgumentException('message');
     }
 
-    public function testCreate(): void
+    public function testCanBeCaughtAsSplException(): void
     {
-        $this->assertInstanceOf(InvalidArgumentException::class, $this->exceptionInterfaceMock);
+        $this->expectException(\InvalidArgumentException::class);
+
+        throw new InvalidArgumentException('message');
     }
 }

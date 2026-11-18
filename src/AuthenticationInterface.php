@@ -19,7 +19,7 @@ interface AuthenticationInterface
     public function authenticate(ServerRequestInterface $request): AuthenticationResult;
 
     /**
-     * Check is there's an identity set
+     * Check if there is an identity set
      */
     public function hasIdentity(): bool;
 

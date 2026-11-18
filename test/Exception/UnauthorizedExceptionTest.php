@@ -4,21 +4,36 @@ declare(strict_types=1);
 
 namespace DotTest\Authentication\Exception;
 
+use Dot\Authentication\Exception\ExceptionInterface;
 use Dot\Authentication\Exception\UnauthorizedException;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use TypeError;
 
-class UnauthorizedExceptionTest extends TestCase
+final class UnauthorizedExceptionTest extends TestCase
 {
-    protected UnauthorizedException|MockObject $exceptionInterfaceMock;
-
-    public function setUp(): void
+    public function testDefaultCodeIs401(): void
     {
-        $this->exceptionInterfaceMock = $this->createMock(UnauthorizedException::class);
+        $exception = new UnauthorizedException();
+
+        $this->assertSame(401, $exception->getCode());
+        $this->assertSame('', $exception->getMessage());
     }
 
-    public function testCreate(): void
+    public function testCanBeCaughtAsPackageException(): void
     {
-        $this->assertInstanceOf(UnauthorizedException::class, $this->exceptionInterfaceMock);
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionCode(401);
+
+        throw new UnauthorizedException();
+    }
+
+    public function testAcceptsAnyThrowableAsPrevious(): void
+    {
+        $previous  = new TypeError('inner');
+        $exception = new UnauthorizedException('Login required', 403, $previous);
+
+        $this->assertSame('Login required', $exception->getMessage());
+        $this->assertSame(403, $exception->getCode());
+        $this->assertSame($previous, $exception->getPrevious());
     }
 }
