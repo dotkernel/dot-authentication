@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-         bootstrap="vendor/autoload.php">
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         cacheDirectory=".phpunit.cache"
+         displayDetailsOnAllIssues="true"
+         failOnAllIssues="true"
+         beStrictAboutOutputDuringTests="true">
     <testsuites>
         <testsuite name="Dot Authentication Test Suite">
             <directory>./test</directory>
         </testsuite>
     </testsuites>
-    <coverage/>
     <source>
         <include>
             <directory suffix=".php">./src</directory>

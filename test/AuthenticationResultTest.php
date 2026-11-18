@@ -5,46 +5,75 @@ declare(strict_types=1);
 namespace DotTest\Authentication;
 
 use Dot\Authentication\AuthenticationResult;
-use Dot\Authentication\Identity\IdentityInterface;
-use PHPUnit\Framework\MockObject\Exception;
-use PHPUnit\Framework\MockObject\MockObject;
+use DotTest\Authentication\Fixture\IdentityFixture;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-class AuthenticationResultTest extends TestCase
+final class AuthenticationResultTest extends TestCase
 {
-    protected AuthenticationResult $subject;
-    protected IdentityInterface|MockObject $identityInterfaceMock;
+    public function testConstructorStoresAllValues(): void
+    {
+        $identity = new IdentityFixture();
+        $result   = new AuthenticationResult(AuthenticationResult::SUCCESS, 'valid', $identity);
+
+        $this->assertSame(AuthenticationResult::SUCCESS, $result->getCode());
+        $this->assertSame('valid', $result->getMessage());
+        $this->assertSame($identity, $result->getIdentity());
+        $this->assertTrue($result->hasIdentity());
+    }
+
+    public function testConstructorDefaults(): void
+    {
+        $result = new AuthenticationResult(AuthenticationResult::FAILURE);
+
+        $this->assertSame('', $result->getMessage());
+        $this->assertNull($result->getIdentity());
+        $this->assertFalse($result->hasIdentity());
+    }
 
     /**
-     * @throws Exception
+     * @return iterable<string, array{int, bool}>
      */
-    protected function setUp(): void
+    public static function codeProvider(): iterable
     {
-        $this->identityInterfaceMock = $this->createMock(IdentityInterface::class);
-        $this->identityInterfaceMock->method('getId')->will($this->returnValue(10));
-        $this->identityInterfaceMock->method('getName')->willReturn('username');
-        $this->subject = new AuthenticationResult(2, 'valid', $this->identityInterfaceMock);
+        yield 'success' => [AuthenticationResult::SUCCESS, true];
+        yield 'failure' => [AuthenticationResult::FAILURE, false];
+        yield 'invalid credentials' => [AuthenticationResult::FAILURE_INVALID_CREDENTIALS, false];
+        yield 'identity ambiguous' => [AuthenticationResult::FAILURE_IDENTITY_AMBIGUOUS, false];
+        yield 'identity not found' => [AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND, false];
+        yield 'uncategorized' => [AuthenticationResult::FAILURE_UNCATEGORIZED, false];
+        yield 'missing credentials' => [AuthenticationResult::FAILURE_MISSING_CREDENTIALS, false];
+        yield 'custom positive code' => [2, true];
     }
 
-    public function testCreate(): void
+    #[DataProvider('codeProvider')]
+    public function testIsValidDependsOnCode(int $code, bool $expected): void
     {
-        $this->assertInstanceOf(IdentityInterface::class, $this->identityInterfaceMock);
+        $this->assertSame($expected, (new AuthenticationResult($code))->isValid());
     }
 
-    public function testAuth(): void
+    public function testSettersReplaceValues(): void
     {
-        $code      = $this->subject->getCode();
-        $message   = $this->subject->getMessage();
-        $name      = $this->subject->getIdentity();
-        $interface = $this->subject->hasIdentity();
-        $isValid   = $this->subject->isValid();
+        $identity = new IdentityFixture(20, 'other');
+        $result   = new AuthenticationResult(AuthenticationResult::FAILURE);
 
-        $this->assertSame(2, $code);
-        $this->assertSame('valid', $message);
-        $this->assertSame('username', $name->getName());
-        $this->assertSame(10, $name->getId());
-        $this->assertTrue($interface);
-        $this->assertEquals('valid', $message);
-        $this->assertTrue($isValid);
+        $result->setCode(AuthenticationResult::SUCCESS);
+        $result->setMessage('changed');
+        $result->setIdentity($identity);
+
+        $this->assertSame(AuthenticationResult::SUCCESS, $result->getCode());
+        $this->assertSame('changed', $result->getMessage());
+        $this->assertSame($identity, $result->getIdentity());
+        $this->assertTrue($result->isValid());
+    }
+
+    public function testSetIdentityAcceptsNullToClearIdentity(): void
+    {
+        $result = new AuthenticationResult(AuthenticationResult::SUCCESS, '', new IdentityFixture());
+
+        $result->setIdentity(null);
+
+        $this->assertNull($result->getIdentity());
+        $this->assertFalse($result->hasIdentity());
     }
 }

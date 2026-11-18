@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace DotTest\Authentication\Exception;
 
+use Dot\Authentication\Exception\ExceptionInterface;
 use Dot\Authentication\Exception\RuntimeException;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-class RuntimeExceptionTest extends TestCase
+final class RuntimeExceptionTest extends TestCase
 {
-    protected RuntimeException|MockObject $exceptionInterfaceMock;
-
-    public function setUp(): void
+    public function testCanBeCaughtAsPackageException(): void
     {
-        $this->exceptionInterfaceMock = $this->createMock(RuntimeException::class);
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage('message');
+
+        throw new RuntimeException('message');
     }
 
-    public function testCreate(): void
+    public function testCanBeCaughtAsSplException(): void
     {
-        $this->assertInstanceOf(RuntimeException::class, $this->exceptionInterfaceMock);
+        $this->expectException(\RuntimeException::class);
+
+        throw new RuntimeException('message');
     }
 }

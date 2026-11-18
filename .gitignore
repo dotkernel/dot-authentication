@@ -34,4 +34,5 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 .phpunit.result.cache
+.phpunit.cache
 .phpcs-cache

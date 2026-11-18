@@ -8,13 +8,13 @@ use Dot\Authentication\Identity\IdentityInterface;
 
 class AuthenticationResult
 {
-    public const FAILURE                     = 0;
-    public const SUCCESS                     = 1;
-    public const FAILURE_INVALID_CREDENTIALS = -1;
-    public const FAILURE_IDENTITY_AMBIGUOUS  = -2;
-    public const FAILURE_IDENTITY_NOT_FOUND  = -3;
-    public const FAILURE_UNCATEGORIZED       = -4;
-    public const FAILURE_MISSING_CREDENTIALS = -5;
+    public const int FAILURE                     = 0;
+    public const int SUCCESS                     = 1;
+    public const int FAILURE_INVALID_CREDENTIALS = -1;
+    public const int FAILURE_IDENTITY_AMBIGUOUS  = -2;
+    public const int FAILURE_IDENTITY_NOT_FOUND  = -3;
+    public const int FAILURE_UNCATEGORIZED       = -4;
+    public const int FAILURE_MISSING_CREDENTIALS = -5;
 
     protected int $code;
 
@@ -54,7 +54,7 @@ class AuthenticationResult
         return $this->identity;
     }
 
-    public function setIdentity(IdentityInterface $identity): void
+    public function setIdentity(?IdentityInterface $identity): void
     {
         $this->identity = $identity;
     }
