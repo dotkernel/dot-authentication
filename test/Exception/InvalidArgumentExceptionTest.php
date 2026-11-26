@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace DotTest\Authentication\Exception;
 
 use InvalidArgumentException;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
 class InvalidArgumentExceptionTest extends TestCase
 {
-    protected InvalidArgumentException|MockObject $exceptionInterfaceMock;
+    protected InvalidArgumentException|Stub $exceptionInterfaceMock;
 
     public function setUp(): void
     {
-        $this->exceptionInterfaceMock = $this->createMock(InvalidArgumentException::class);
+        $this->exceptionInterfaceMock = $this->createStub(InvalidArgumentException::class);
     }
 
     public function testCreate(): void
