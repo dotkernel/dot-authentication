@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace DotTest\Authentication\Exception;
 
 use Dot\Authentication\Exception\UnauthorizedException;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
 class UnauthorizedExceptionTest extends TestCase
 {
-    protected UnauthorizedException|MockObject $exceptionInterfaceMock;
+    protected UnauthorizedException|Stub $exceptionInterfaceMock;
 
     public function setUp(): void
     {
-        $this->exceptionInterfaceMock = $this->createMock(UnauthorizedException::class);
+        $this->exceptionInterfaceMock = $this->createStub(UnauthorizedException::class);
     }
 
     public function testCreate(): void
